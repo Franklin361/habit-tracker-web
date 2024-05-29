@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useHabitStore } from '../store/habit';
 import { ref } from 'vue';
+import draggable from "vuedraggable";
+import { useHabitStore } from '../store/habit';
 
 const useHabit = useHabitStore()
 
@@ -49,16 +50,22 @@ const onRemoveHabit = (habitId: string) => {
         class="bg-[#222831] p-4 rounded-md md:flex-1 flex-none md:min-w-[400px] space-y-2 overflow-y-auto max-h-[40dvh] w-full"
         v-if="useHabit.getHabitsFromSchedule().length > 0">
 
-        <div v-for="(item, index) in useHabit.getHabitsFromSchedule()" :key="index"
-          class="flex items-center gap-5 justify-between group p-2 bg-black/50 rounded-md border-2"
-          :style="[{ borderColor: item.color, color: item.color }]">
-          <p class=" font-semibold">{{ item.title }}</p>
-          <button
-            class="text-sm bg-rose-600 hover:bg-rose-700 active:bg-rose-600 transition-all p-1 px-2 rounded-lg group-hover:opacity-100 opacity-0 text-white"
-            @click="onRemoveHabit(item.id)">
-            Remove
-          </button>
-        </div>
+        <draggable :list="useHabit.getHabitsFromSchedule()" item-key="name" ghost-class="ghost"
+          @end="(e) => console.log(e)" class="space-y-2">
+          <template #item="{ element }">
+            <div class="flex items-center gap-5 justify-between group p-2 bg-black/50 rounded-md border-2"
+              :style="[{ borderColor: element.color, color: element.color }]">
+              <p class=" font-semibold">{{ element.title }}</p>
+              <button
+                class="text-sm bg-rose-600 hover:bg-rose-700 active:bg-rose-600 transition-all p-1 px-2 rounded-lg group-hover:opacity-100 opacity-0 text-white"
+                @click="onRemoveHabit(element.id)">
+                Remove
+              </button>
+            </div>
+          </template>
+        </draggable>
+
+
       </div>
       <div v-else
         class="bg-[#222831] p-4 rounded-md md:flex-1 flex-none md:min-w-[400px] space-y-2 overflow-y-auto max-h-[40dvh] w-full">
