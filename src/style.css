@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Indie+Flower&family=Patrick+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply leading-tight;
+  }
+  body {
+    @apply bg-[#0C0C0C] text-[#EEEEEE];
+  }
+  input,
+  select {
+    @apply text-[#0C0C0C];
+  }
+}
+
+h1 {
+  text-shadow: 2px 5px 8px #910a67;
+}
+
+/* 
+
+#EEEEEE 
+#222831 
+#0C0C0C 
+
+*/
